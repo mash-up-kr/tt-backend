@@ -33,12 +33,12 @@ public class ShareLinkController {
     private static final String EVERY_TIME_TIMETABLE_API = "https://everytime.kr/find/timetable/table/friend";
 
     @PostMapping("/shareLink")
-    public String addShareLink(@RequestParam("share_link") String shareLink) throws IOException {
+    public TimeTable addShareLink(@RequestParam("share_link") String shareLink) throws IOException {
         URL url = new URL(shareLink);
         String identifierKey = url.getPath().replace("/@", "");
         TimeTable timeTable = readEveryTimeTimeTable(identifierKey);
         //TODO : 파싱된 시간표 정보를 db에 추가해야함.
-        return "";
+        return timeTable;
     }
 
     private TimeTable readEveryTimeTimeTable(String identifier) throws IOException {
