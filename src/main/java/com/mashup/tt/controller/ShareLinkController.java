@@ -24,6 +24,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 @RestController
@@ -33,8 +34,10 @@ public class ShareLinkController {
 
     @PostMapping("/shareLink")
     public String addShareLink(@RequestParam("share_link") String shareLink) throws IOException {
-        TimeTable timeTable = readEveryTimeTimeTable("<TEST_KEY>");
-
+        URL url = new URL(shareLink);
+        String identifierKey = url.getPath().replace("/@", "");
+        TimeTable timeTable = readEveryTimeTimeTable(identifierKey);
+        //TODO : 파싱된 시간표 정보를 db에 추가해야함.
         return "";
     }
 
